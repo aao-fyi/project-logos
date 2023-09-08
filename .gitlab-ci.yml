@@ -1,0 +1,47 @@
+image: node:latest
+
+stages:
+  - build
+
+variables:
+  GIT_USER_NAME: "Commit Bot"
+  GIT_USER_EMAIL: "bot@example.com"
+  GIT_SSH_KEY: "SSH-Private-Key-Base64"
+  GIT_REPO_URL: "ssh://git@gitlab.com/$CI_PROJECT_PATH.git"
+
+build:
+  stage: build
+  before_script:
+  # Setup git
+    # Configure git
+    - git config user.name "$GIT_USER_NAME"
+    - git config user.email "$GIT_USER_EMAIL"
+    - git remote set-url origin "$GIT_REPO_URL"
+    # Configure SSH
+    - mkdir -p ~/.ssh
+    - echo "$GIT_SSH_KEY" | base64 --decode > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    # Checkout
+    - git checkout -b build
+  # Install dependencies
+    # Install SVGO, SVGExport
+    - npm install -g svgexport svgo
+
+  # Generate logos
+  script:
+    # Create logo.svg/png from source.svg
+    - |
+      find . -type d -exec sh -c 'if [ -e "{}"/source.svg ]; then
+        # Export source.svg to logo.svg
+        svgo -i "{}"/source.svg -o "{}"/logo.svg
+        # Export logo.svg to logo.png
+        svgexport "{}"/logo.svg "{}"/logo.png 512:512
+      fi' \;
+    # Commit changes
+    - git add .
+    - git commit -m "Build logo [skip ci]"
+    # Push changes
+    - git push origin build:main
+  only:
+    - main
