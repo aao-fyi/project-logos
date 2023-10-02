@@ -12,7 +12,6 @@ variables:
 build:
   stage: build
   before_script:
-  # Setup git
     # Configure git
     - git config user.name "$GIT_USER_NAME"
     - git config user.email "$GIT_USER_EMAIL"
@@ -24,24 +23,21 @@ build:
     - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
     # Checkout
     - git checkout -b build
-  # Install dependencies
-    # Install SVGO, SVGExport
-    - npm install -g svgexport svgo
 
-  # Generate logos
+    # Install svgo
+    - npm install -g svgo
   script:
     # Create logo.svg/png from source.svg
     - |
       find . -type d -exec sh -c 'if [ -e "{}"/source.svg ]; then
         # Export source.svg to logo.svg
         svgo -i "{}"/source.svg -o "{}"/logo.svg
-        # Export logo.svg to logo.png
-        svgexport "{}"/logo.svg "{}"/logo.png 512:512
       fi' \;
     # Commit changes
     - git add .
     - git commit -m "Build logo [skip ci]"
     # Push changes
     - git push origin build:main
+
   only:
     - main
