@@ -26,13 +26,20 @@ build:
 
     # Install svgo
     - npm install -g svgo
+    # Install svg2png
+    - npm install -g svg2png
   script:
-    # Create logo.svg/png from source.svg
+    # Create logo.svg from source.svg
     - |
       find . -type d -exec sh -c 'if [ -e "{}"/source.svg ]; then
-        # Export source.svg to logo.svg
         svgo -i "{}"/source.svg -o "{}"/logo.svg
       fi' \;
+    # Create logo.png from logo.svg
+    - |
+      find . -type d -exec sh -c 'if [ -e "{}"/logo.svg ]; then
+        svg2png "{}"/source.svg --output="{}"/logo.png --width=512
+      fi' \;
+  after_script:
     # Commit changes
     - git add .
     - git commit -m "Build logo [skip ci]"
