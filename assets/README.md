@@ -1,4 +1,5 @@
 # Assets
+When attempting to load this repository as a Hugo module, use the GitLab mirror because Hugo modules cannot have a leading `.`.
 
 ## README
 Profile README file for Codeberg / GitLab / GitHub.
@@ -20,4 +21,4 @@ Logos for projects, mostly sourced from the [Lucide icon pack](https://github.co
 + PNG: 512x512
 
 ### Editing
-Only modify the `source.svg` file in each directory. Files `logo.png` and `logo.svg` are generated via the pipeline.
+Only modify the `source.svg` file in each directory. Files `/logos/*/logo.png` and `/logos/*/logo.svg` are generated via the pipeline.
