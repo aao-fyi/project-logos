@@ -5,4 +5,4 @@ Just feeding the algorithms.
 
 ---
 
-[<img src="./assets/readme/codeberg.svg" alt="Codeberg" width="24"/>](https://codeberg.org/aao-fyi/) | [<img src="./assets/readme/gitlab.svg" alt="GitLab" width="24"/>](https://gitlab.com/aao-fyi/) | [<img src="./assets/readme/github.svg" alt="GitHub" width="24"/>](https://github.com/aao-fyi/) | [<img src="./assets/readme/mastodon.svg" alt="Mastodon" width="24"/>](https://mastodon.social/@aaofyi)
+<a href="https://codeberg.org/aao-fyi/" rel="noopener noreferrer"><img src="./assets/readme/codeberg.svg" alt="Codeberg" width="24"/></a> | <a href="https://gitlab.com/aao-fyi/" rel="noopener noreferrer"><img src="./assets/readme/gitlab.svg" alt="GitLab" width="24"/></a> | <a href="https://github.com/aao-fyi/" rel="noopener noreferrer"><img src="./assets/readme/github.svg" alt="GitHub" width="24"/></a> | <a href="https://mastodon.social/@aaofyi" rel="noopener noreferrer me"><img src="./assets/readme/mastodon.svg" alt="Mastodon" width="24"/></a>
